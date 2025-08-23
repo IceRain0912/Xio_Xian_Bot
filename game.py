@@ -3,10 +3,15 @@ from discord.ext import commands
 import random
 import json
 import os
+from dotenv import load_dotenv
 
 intents = discord.Intents.default()
 intents.message_content = True
 bot = commands.Bot(command_prefix="!", intents=intents)
+
+load_dotenv()
+TOKEN = os.getenv("TOKEN")
+CHANNEL_ID = int(os.getenv("CHANNEL_ID"))
 
 # 玩家數據
 players = {}
@@ -422,7 +427,7 @@ def choose_root():
 async def on_ready():
     load_players()
     print(f"已登入為 {bot.user}")
-    channel = bot.get_channel(1406708461043056721)
+    channel = bot.get_channel(CHANNEL_ID)
     if channel:
         await channel.send("光曆69年，您作為一位修真者來到了這世間。在這弱肉強食的亂世之中，您修練的每一動都將與您未來的生死息息相關...")
         await channel.send("輸入!start以開始遊戲..")
@@ -478,4 +483,4 @@ async def clear(ctx, limit: int = 100):
     await ctx.send(f"✅ 已刪除 {len(deleted)} 則訊息", delete_after=5)
 
 # ===== 啟動 =====
-bot.run("MTQwNjcwNTk1MjI1MzY3MzQ4Mw.GVrrF-.IGbWn6yv09z8IWdR0z-IbabJO9eV1E-9-EJ0rw")
+bot.run(TOKEN)
