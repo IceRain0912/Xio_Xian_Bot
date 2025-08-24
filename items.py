@@ -1,4 +1,4 @@
-# items.py
+# ===== 商店物品 =====
 shop_items = [
     {"name": "靈草", "price": 20},
     {"name": "清心散", "price": 50},
